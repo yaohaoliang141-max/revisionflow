@@ -1,0 +1,2 @@
+import { describe, expect, it } from "vitest";import { fullReportMarkdown, revisionPlanCsv } from "@/lib/exports";import { sampleProject, sampleResult } from "@/lib/sample-data";
+describe("exports",()=>{it("creates the required csv columns",()=>expect(revisionPlanCsv(sampleResult)).toContain("Source References"));it("creates a report containing client reply",()=>expect(fullReportMarkdown(sampleProject,sampleResult,"test")).toContain("## Client reply"))});

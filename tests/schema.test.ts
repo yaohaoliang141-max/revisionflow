@@ -1,0 +1,2 @@
+import { describe, expect, it } from "vitest";import { analysisResultSchema } from "@/lib/schema";import { sampleResult } from "@/lib/sample-data";
+describe("analysis schema",()=>{it("accepts a valid report",()=>expect(analysisResultSchema.safeParse(sampleResult).success).toBe(true));it("rejects an invalid confidence",()=>expect(analysisResultSchema.safeParse({...sampleResult,revision_items:[{...sampleResult.revision_items[0],confidence:2}]}).success).toBe(false))});
