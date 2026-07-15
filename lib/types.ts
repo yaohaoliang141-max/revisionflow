@@ -1,9 +1,95 @@
-export type ProjectType = "Video Production" | "Graphic Design" | "UI/UX Design" | "Web Development" | "Software Development" | "Social Media" | "Photography" | "Architecture" | "Interior Design" | "Other";
-export type Channel = "Email" | "Meeting Notes" | "Slack" | "Discord" | "Client Call" | "Frame.io" | "Document" | "Other";
-export interface TeamMember { id: string; name: string; role: string }
-export interface ProjectContext { name: string; type: ProjectType; description: string; currentVersion: string; team: TeamMember[] }
-export interface FeedbackSource { id: string; name: string; channel: Channel; author: string; authorRole: string; date: string; text: string }
-export type Priority = "high" | "medium" | "low"; export type Status = "confirmed" | "needs_clarification" | "blocked";
-export interface RevisionItem { id:string; asset:string|null; location:string|null; requested_change:string; rationale:string|null; priority:Priority; owner:string; status:Status; source_refs:string[]; evidence_quotes:{source_ref:string;quote:string}[]; confidence:number }
-export interface AnalysisResult { meta:{project_name:string;current_version:string|null;source_count:number;warnings:string[]}; revision_items:RevisionItem[]; duplicate_groups:{id:string;summary:string;source_refs:string[];explanation:string}[]; contradictions:{id:string;topic:string;statements:{source_ref:string;statement:string}[];why_conflicting:string;suggested_resolution:string|null}[]; clarification_questions:{id:string;question:string;related_source_refs:string[];related_revision_ids:string[];urgency:"before_work"|"before_delivery"|"optional"}[]; revision_summary:{executive_summary:string;confirmed_count:number;needs_clarification_count:number;blocked_count:number;contradiction_count:number;next_actions:string[]}; client_reply:{subject:string;body:string} }
-export interface Usage { prompt_tokens?:number; completion_tokens?:number; total_tokens?:number; cost?:number }
+export type ProjectType =
+  | "Video Production"
+  | "Graphic Design"
+  | "UI/UX Design"
+  | "Web Development"
+  | "Software Development"
+  | "Social Media"
+  | "Photography"
+  | "Architecture"
+  | "Interior Design"
+  | "Other";
+export type Channel =
+  | "Email"
+  | "Meeting Notes"
+  | "Slack"
+  | "Discord"
+  | "Client Call"
+  | "Frame.io"
+  | "Document"
+  | "Other";
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+}
+export interface ProjectContext {
+  name: string;
+  type: ProjectType;
+  description: string;
+  currentVersion: string;
+  team: TeamMember[];
+}
+export interface FeedbackSource {
+  id: string;
+  name: string;
+  channel: Channel;
+  author: string;
+  authorRole: string;
+  date: string;
+  text: string;
+}
+export type Priority = "high" | "medium" | "low";
+export type Status = "confirmed" | "needs_clarification" | "blocked";
+export interface RevisionItem {
+  id: string;
+  asset: string | null;
+  location: string | null;
+  requested_change: string;
+  rationale: string | null;
+  priority: Priority;
+  owner: string;
+  status: Status;
+  source_refs: string[];
+  evidence_quotes: { source_ref: string; quote: string }[];
+  confidence: number;
+}
+export interface AnalysisResult {
+  meta: {
+    project_name: string;
+    current_version: string | null;
+    source_count: number;
+    warnings: string[];
+  };
+  revision_items: RevisionItem[];
+  duplicate_groups: { id: string; summary: string; source_refs: string[]; explanation: string }[];
+  contradictions: {
+    id: string;
+    topic: string;
+    statements: { source_ref: string; statement: string }[];
+    why_conflicting: string;
+    suggested_resolution: string | null;
+  }[];
+  clarification_questions: {
+    id: string;
+    question: string;
+    related_source_refs: string[];
+    related_revision_ids: string[];
+    urgency: "before_work" | "before_delivery" | "optional";
+  }[];
+  revision_summary: {
+    executive_summary: string;
+    confirmed_count: number;
+    needs_clarification_count: number;
+    blocked_count: number;
+    contradiction_count: number;
+    next_actions: string[];
+  };
+  client_reply: { subject: string; body: string };
+}
+export interface Usage {
+  prompt_tokens?: number;
+  completion_tokens?: number;
+  total_tokens?: number;
+  cost?: number;
+}

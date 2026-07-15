@@ -1,1 +1,23 @@
-export function safeOpenRouterError(status:number){if(status===401||status===403)return {code:"INVALID_API_KEY",message:"Your OpenRouter API key was rejected."};if(status===402)return {code:"INSUFFICIENT_CREDITS",message:"The selected provider reported insufficient credits."};if(status===429)return {code:"RATE_LIMITED",message:"The provider rate limit was reached. Please try again shortly."};if(status===400||status===404)return {code:"UNSUPPORTED_MODEL",message:"The selected model is unavailable or does not support this request."};return {code:"OPENROUTER_ERROR",message:"OpenRouter could not complete the analysis. Please verify the model and try again."}}
+export function safeOpenRouterError(status: number) {
+  if (status === 401 || status === 403)
+    return { code: "INVALID_API_KEY", message: "Your OpenRouter API key was rejected." };
+  if (status === 402)
+    return {
+      code: "INSUFFICIENT_CREDITS",
+      message: "The selected provider reported insufficient credits.",
+    };
+  if (status === 429)
+    return {
+      code: "RATE_LIMITED",
+      message: "The provider rate limit was reached. Please try again shortly.",
+    };
+  if (status === 400 || status === 404)
+    return {
+      code: "UNSUPPORTED_MODEL",
+      message: "The selected model is unavailable or does not support this request.",
+    };
+  return {
+    code: "OPENROUTER_ERROR",
+    message: "OpenRouter could not complete the analysis. Please verify the model and try again.",
+  };
+}

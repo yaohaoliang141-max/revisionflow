@@ -1,3 +1,40 @@
 "use client";
 import { X } from "lucide-react";
-export function PrivacyDialog({onClose}:{onClose:()=>void}){return <div className="dialog-back" role="dialog" aria-modal="true" aria-labelledby="privacy-title" onMouseDown={onClose}><section className="dialog" onMouseDown={e=>e.stopPropagation()}><button className="btn small" style={{float:"right"}} aria-label="Close privacy information" onClick={onClose}><X size={14}/></button><h2 id="privacy-title">Privacy and data handling</h2><ul><li>RevisionFlow does not create user accounts.</li><li>RevisionFlow does not save projects to a database.</li><li>API keys are not stored by RevisionFlow.</li><li>Uploaded files are parsed locally where possible.</li><li>Extracted project content is sent to OpenRouter and the selected model provider when analysis is requested.</li><li>Users should not submit confidential information unless they understand the selected provider&apos;s data policy.</li><li>Refreshing the page clears the current API key and unsaved project.</li></ul></section></div>}
+export function PrivacyDialog({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      className="dialog-back"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="privacy-title"
+      onMouseDown={onClose}
+    >
+      <section className="dialog" onMouseDown={(e) => e.stopPropagation()}>
+        <button
+          className="btn small"
+          style={{ float: "right" }}
+          aria-label="Close privacy information"
+          onClick={onClose}
+        >
+          <X size={14} />
+        </button>
+        <h2 id="privacy-title">Privacy and data handling</h2>
+        <ul>
+          <li>RevisionFlow does not create user accounts.</li>
+          <li>RevisionFlow does not save projects to a database.</li>
+          <li>API keys are not stored by RevisionFlow.</li>
+          <li>Uploaded files are parsed locally where possible.</li>
+          <li>
+            Extracted project content is sent to OpenRouter and the selected model provider when
+            analysis is requested.
+          </li>
+          <li>
+            Users should not submit confidential information unless they understand the selected
+            provider&apos;s data policy.
+          </li>
+          <li>Refreshing the page clears the current API key and unsaved project.</li>
+        </ul>
+      </section>
+    </div>
+  );
+}

@@ -1,4 +1,199 @@
 import type { AnalysisResult, FeedbackSource, ProjectContext } from "./types";
-export const sampleProject:ProjectContext={name:"Spring Campaign Launch",type:"Video Production",description:"A launch video for the spring campaign. Review the Rough Cut V2 and prepare a client-ready revision plan.",currentVersion:"Rough Cut V2",team:[{id:"t1",name:"Sarah",role:"Project Manager"},{id:"t2",name:"James",role:"Video Editor"},{id:"t3",name:"Mia",role:"Graphic Designer"}]};
-export const sampleSources:FeedbackSource[]=[{id:"F001",name:"Marketing Director email",channel:"Email",author:"Marketing Director",authorRole:"Client",date:"",text:"The opening title needs to be much larger. It should be the first thing viewers notice. Please replace the product shot at 00:24 with the version we approved yesterday."},{id:"F002",name:"Brand Manager Slack",channel:"Slack",author:"Brand Manager",authorRole:"Client",date:"",text:"The title already feels too dominant. I would rather make the product more prominent. Also, can we use the newer product image in the middle section?"},{id:"F003",name:"Client team meeting notes",channel:"Meeting Notes",author:"Client Team",authorRole:"Client",date:"",text:"Keep the video under 45 seconds. The current music is approved. The CTA wording still needs legal confirmation."},{id:"F004",name:"Marketing Director email",channel:"Email",author:"Marketing Director",authorRole:"Client",date:"",text:"Please make sure the final runtime does not exceed 45 seconds. The end card should stay on screen for at least three seconds."}];
-export const sampleResult:AnalysisResult={meta:{project_name:"Spring Campaign Launch",current_version:"Rough Cut V2",source_count:4,warnings:["Product image version is not uniquely identified."]},revision_items:[{id:"R001",asset:"Opening title",location:"Opening",requested_change:"Increase the opening title size so it is the first visual focus.",rationale:"Requested by Marketing Director.",priority:"medium",owner:"Mia",status:"confirmed",source_refs:["F001"],evidence_quotes:[{source_ref:"F001",quote:"The opening title needs to be much larger."}],confidence:.96},{id:"R002",asset:"Product shot",location:"00:24",requested_change:"Replace the product shot with the previously approved version.",rationale:"The approved version is not identified in the supplied feedback.",priority:"medium",owner:"James",status:"needs_clarification",source_refs:["F001"],evidence_quotes:[{source_ref:"F001",quote:"replace the product shot at 00:24 with the version we approved yesterday"}],confidence:.84},{id:"R003",asset:"Video runtime",location:null,requested_change:"Keep the final video runtime at or below 45 seconds.",rationale:null,priority:"medium",owner:"James",status:"confirmed",source_refs:["F003","F004"],evidence_quotes:[{source_ref:"F003",quote:"Keep the video under 45 seconds."},{source_ref:"F004",quote:"final runtime does not exceed 45 seconds"}],confidence:.99},{id:"R004",asset:"CTA wording",location:null,requested_change:"Obtain legal confirmation for the CTA wording before finalising it.",rationale:"Legal confirmation is explicitly pending.",priority:"high",owner:"Unassigned",status:"blocked",source_refs:["F003"],evidence_quotes:[{source_ref:"F003",quote:"The CTA wording still needs legal confirmation."}],confidence:.98},{id:"R005",asset:"End card",location:"End card",requested_change:"Keep the end card on screen for at least three seconds.",rationale:null,priority:"medium",owner:"James",status:"confirmed",source_refs:["F004"],evidence_quotes:[{source_ref:"F004",quote:"The end card should stay on screen for at least three seconds."}],confidence:.97}],duplicate_groups:[{id:"D001",summary:"Final video runtime must not exceed 45 seconds.",source_refs:["F003","F004"],explanation:"Both sources clearly request the same measurable runtime outcome."}],contradictions:[{id:"C001",topic:"Opening title prominence",statements:[{source_ref:"F001",statement:"The opening title needs to be much larger."},{source_ref:"F002",statement:"The title already feels too dominant."}],why_conflicting:"One request increases title prominence while the other says it is already too prominent.",suggested_resolution:"Ask the client to confirm the intended hierarchy between the title and product."}],clarification_questions:[{id:"Q001",question:"Which exact approved product shot should replace the shot at 00:24?",related_source_refs:["F001"],related_revision_ids:["R002"],urgency:"before_work"},{id:"Q002",question:"Should the newer product image be used in the middle section, and if so which asset is the current approved version?",related_source_refs:["F002"],related_revision_ids:["R002"],urgency:"before_work"}],revision_summary:{executive_summary:"Five revision items were identified. Runtime and end-card requirements are confirmed; the CTA is blocked pending legal confirmation. The title hierarchy is contradictory and product-image choices need client confirmation.",confirmed_count:3,needs_clarification_count:1,blocked_count:1,contradiction_count:1,next_actions:["Confirm the preferred title-to-product hierarchy.","Identify the approved product image assets.","Obtain legal confirmation for CTA wording."]},client_reply:{subject:"Spring Campaign Launch — revision plan and confirmations",body:"Hello,\n\nWe have consolidated 5 revision items for Rough Cut V2. Three items are confirmed, one item needs asset clarification, and the CTA remains pending legal confirmation.\n\nBefore work begins, please confirm the preferred hierarchy between the opening title and product, and identify the approved product image for 00:24 and the middle section. We also noted one title-prominence conflict that needs a decision.\n\nThank you."}};
+export const sampleProject: ProjectContext = {
+  name: "Spring Campaign Launch",
+  type: "Video Production",
+  description:
+    "A launch video for the spring campaign. Review the Rough Cut V2 and prepare a client-ready revision plan.",
+  currentVersion: "Rough Cut V2",
+  team: [
+    { id: "t1", name: "Sarah", role: "Project Manager" },
+    { id: "t2", name: "James", role: "Video Editor" },
+    { id: "t3", name: "Mia", role: "Graphic Designer" },
+  ],
+};
+export const sampleSources: FeedbackSource[] = [
+  {
+    id: "F001",
+    name: "Marketing Director email",
+    channel: "Email",
+    author: "Marketing Director",
+    authorRole: "Client",
+    date: "",
+    text: "The opening title needs to be much larger. It should be the first thing viewers notice. Please replace the product shot at 00:24 with the version we approved yesterday.",
+  },
+  {
+    id: "F002",
+    name: "Brand Manager Slack",
+    channel: "Slack",
+    author: "Brand Manager",
+    authorRole: "Client",
+    date: "",
+    text: "The title already feels too dominant. I would rather make the product more prominent. Also, can we use the newer product image in the middle section?",
+  },
+  {
+    id: "F003",
+    name: "Client team meeting notes",
+    channel: "Meeting Notes",
+    author: "Client Team",
+    authorRole: "Client",
+    date: "",
+    text: "Keep the video under 45 seconds. The current music is approved. The CTA wording still needs legal confirmation.",
+  },
+  {
+    id: "F004",
+    name: "Marketing Director email",
+    channel: "Email",
+    author: "Marketing Director",
+    authorRole: "Client",
+    date: "",
+    text: "Please make sure the final runtime does not exceed 45 seconds. The end card should stay on screen for at least three seconds.",
+  },
+];
+export const sampleResult: AnalysisResult = {
+  meta: {
+    project_name: "Spring Campaign Launch",
+    current_version: "Rough Cut V2",
+    source_count: 4,
+    warnings: ["Product image version is not uniquely identified."],
+  },
+  revision_items: [
+    {
+      id: "R001",
+      asset: "Opening title",
+      location: "Opening",
+      requested_change: "Increase the opening title size so it is the first visual focus.",
+      rationale: "Requested by Marketing Director.",
+      priority: "medium",
+      owner: "Mia",
+      status: "confirmed",
+      source_refs: ["F001"],
+      evidence_quotes: [
+        { source_ref: "F001", quote: "The opening title needs to be much larger." },
+      ],
+      confidence: 0.96,
+    },
+    {
+      id: "R002",
+      asset: "Product shot",
+      location: "00:24",
+      requested_change: "Replace the product shot with the previously approved version.",
+      rationale: "The approved version is not identified in the supplied feedback.",
+      priority: "medium",
+      owner: "James",
+      status: "needs_clarification",
+      source_refs: ["F001"],
+      evidence_quotes: [
+        {
+          source_ref: "F001",
+          quote: "replace the product shot at 00:24 with the version we approved yesterday",
+        },
+      ],
+      confidence: 0.84,
+    },
+    {
+      id: "R003",
+      asset: "Video runtime",
+      location: null,
+      requested_change: "Keep the final video runtime at or below 45 seconds.",
+      rationale: null,
+      priority: "medium",
+      owner: "James",
+      status: "confirmed",
+      source_refs: ["F003", "F004"],
+      evidence_quotes: [
+        { source_ref: "F003", quote: "Keep the video under 45 seconds." },
+        { source_ref: "F004", quote: "final runtime does not exceed 45 seconds" },
+      ],
+      confidence: 0.99,
+    },
+    {
+      id: "R004",
+      asset: "CTA wording",
+      location: null,
+      requested_change: "Obtain legal confirmation for the CTA wording before finalising it.",
+      rationale: "Legal confirmation is explicitly pending.",
+      priority: "high",
+      owner: "Unassigned",
+      status: "blocked",
+      source_refs: ["F003"],
+      evidence_quotes: [
+        { source_ref: "F003", quote: "The CTA wording still needs legal confirmation." },
+      ],
+      confidence: 0.98,
+    },
+    {
+      id: "R005",
+      asset: "End card",
+      location: "End card",
+      requested_change: "Keep the end card on screen for at least three seconds.",
+      rationale: null,
+      priority: "medium",
+      owner: "James",
+      status: "confirmed",
+      source_refs: ["F004"],
+      evidence_quotes: [
+        {
+          source_ref: "F004",
+          quote: "The end card should stay on screen for at least three seconds.",
+        },
+      ],
+      confidence: 0.97,
+    },
+  ],
+  duplicate_groups: [
+    {
+      id: "D001",
+      summary: "Final video runtime must not exceed 45 seconds.",
+      source_refs: ["F003", "F004"],
+      explanation: "Both sources clearly request the same measurable runtime outcome.",
+    },
+  ],
+  contradictions: [
+    {
+      id: "C001",
+      topic: "Opening title prominence",
+      statements: [
+        { source_ref: "F001", statement: "The opening title needs to be much larger." },
+        { source_ref: "F002", statement: "The title already feels too dominant." },
+      ],
+      why_conflicting:
+        "One request increases title prominence while the other says it is already too prominent.",
+      suggested_resolution:
+        "Ask the client to confirm the intended hierarchy between the title and product.",
+    },
+  ],
+  clarification_questions: [
+    {
+      id: "Q001",
+      question: "Which exact approved product shot should replace the shot at 00:24?",
+      related_source_refs: ["F001"],
+      related_revision_ids: ["R002"],
+      urgency: "before_work",
+    },
+    {
+      id: "Q002",
+      question:
+        "Should the newer product image be used in the middle section, and if so which asset is the current approved version?",
+      related_source_refs: ["F002"],
+      related_revision_ids: ["R002"],
+      urgency: "before_work",
+    },
+  ],
+  revision_summary: {
+    executive_summary:
+      "Five revision items were identified. Runtime and end-card requirements are confirmed; the CTA is blocked pending legal confirmation. The title hierarchy is contradictory and product-image choices need client confirmation.",
+    confirmed_count: 3,
+    needs_clarification_count: 1,
+    blocked_count: 1,
+    contradiction_count: 1,
+    next_actions: [
+      "Confirm the preferred title-to-product hierarchy.",
+      "Identify the approved product image assets.",
+      "Obtain legal confirmation for CTA wording.",
+    ],
+  },
+  client_reply: {
+    subject: "Spring Campaign Launch — revision plan and confirmations",
+    body: "Hello,\n\nWe have consolidated 5 revision items for Rough Cut V2. Three items are confirmed, one item needs asset clarification, and the CTA remains pending legal confirmation.\n\nBefore work begins, please confirm the preferred hierarchy between the opening title and product, and identify the approved product image for 00:24 and the middle section. We also noted one title-prominence conflict that needs a decision.\n\nThank you.",
+  },
+};

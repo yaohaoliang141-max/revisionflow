@@ -1,2 +1,24 @@
 import Papa from "papaparse";
-export async function parseFeedbackFile(file:File):Promise<string>{const ext=file.name.toLowerCase().split(".").pop();if(!["txt","md","csv","docx"].includes(ext||""))throw new Error("Only TXT, Markdown, CSV and DOCX files are supported.");if(ext==="docx"){const mammoth=await import("mammoth");const result=await mammoth.extractRawText({arrayBuffer:await file.arrayBuffer()});return result.value.trim()}const raw=await file.text();if(ext!=="csv")return raw.trim();const result=Papa.parse<Record<string,string>>(raw,{header:true,skipEmptyLines:true});if(result.errors.length)throw new Error("The CSV file could not be parsed.");return result.data.map((row,i)=>`Row ${i+1}:\n${Object.entries(row).filter(([,v])=>v!==undefined&&v!=="").map(([k,v])=>`${k}: ${v}`).join("\n")}`).join("\n\n")}
+export async function parseFeedbackFile(file: File): Promise<string> {
+  const ext = file.name.toLowerCase().split(".").pop();
+  if (!["txt", "md", "csv", "docx"].includes(ext || ""))
+    throw new Error("Only TXT, Markdown, CSV and DOCX files are supported.");
+  if (ext === "docx") {
+    const mammoth = await import("mammoth");
+    const result = await mammoth.extractRawText({ arrayBuffer: await file.arrayBuffer() });
+    return result.value.trim();
+  }
+  const raw = await file.text();
+  if (ext !== "csv") return raw.trim();
+  const result = Papa.parse<Record<string, string>>(raw, { header: true, skipEmptyLines: true });
+  if (result.errors.length) throw new Error("The CSV file could not be parsed.");
+  return result.data
+    .map(
+      (row, i) =>
+        `Row ${i + 1}:\n${Object.entries(row)
+          .filter(([, v]) => v !== undefined && v !== "")
+          .map(([k, v]) => `${k}: ${v}`)
+          .join("\n")}`,
+    )
+    .join("\n\n");
+}

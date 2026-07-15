@@ -1,42 +1,60 @@
 # RevisionFlow
 
-> Open-source MVP for turning scattered, duplicated, and contradictory client feedback into a traceable revision plan.
+[English](README.md) | [简体中文](README.zh-CN.md)
 
-![Screenshot placeholder](docs/screenshot-placeholder.png)
+> An open-source MVP that turns scattered, duplicated, and contradictory client feedback into a traceable revision plan.
 
-RevisionFlow is a single-page workspace for creative and delivery teams. Paste feedback or upload source files, add a little project context, then use your own OpenRouter key to receive a strict, editable revision report.
+RevisionFlow is a focused single-page workspace for creative and delivery teams. Add project context, paste feedback or import files, then use your own OpenRouter key to generate a strict, editable report.
+
+## Screenshots
+
+### Workspace
+
+![RevisionFlow workspace](public/screenshots/workspace.png)
+
+### Sample report
+
+![RevisionFlow sample report](public/screenshots/sample-report.png)
+
+## Quick demo
+
+1. Run `npm install` and `npm run dev`.
+2. Open `http://localhost:3000`.
+3. Select **Load sample project**, then **Preview sample report**.
+4. Explore the six report tabs, edit a revision item, and export CSV, Markdown, or JSON locally.
+
+The sample report does not require an API key.
 
 ## Features
 
-- Project context and an optional owner-safe team list
-- Multiple editable feedback sources with stable `F001` identifiers, reordering, and removal
+- Project context and an owner-safe team list
+- Multiple editable feedback sources with stable `F001`-style identifiers
 - Browser-side TXT, Markdown, CSV, and DOCX extraction
-- OpenRouter Chat Completions integration using strict JSON Schema output and server-side Zod validation
-- Traceable revision items with direct source evidence
-- Duplicate groups, contradictions, clarification questions, executive summary, and a client reply
-- Editable revision items and client email
+- OpenRouter Chat Completions integration with strict JSON Schema and server-side Zod validation
+- Traceable revision items with source evidence
+- Duplicate groups, contradictions, clarification questions, summary, and client reply
+- Constrained editing for task priority, status, and owner
 - Local CSV, Markdown, and JSON exports
-- Built-in project and report preview that works without an API key
+- Built-in sample project and report
 
 ## How it works
 
-1. Add the project name, type, context, and optional team members.
+1. Add project context and optional team members.
 2. Paste feedback, add sources, or upload supported files.
-3. Enter a current OpenRouter API key and a model ID with strict structured-output support.
-4. Run analysis. The API validates the model result before it is shown.
-5. Review, edit, trace evidence, and export locally.
+3. Enter a current OpenRouter API key and a model that supports strict structured output.
+4. Run analysis, then review, edit, trace, and export the report.
 
 ## Privacy model
 
-There are no accounts, databases, cookies, browser storage, or saved project history. The API key remains only in current React state and is cleared on refresh. When analysis is requested, extracted project content and the key are sent through the server route to OpenRouter and the chosen model provider. Provider data policies apply; do not submit confidential information unless those policies are acceptable.
+There are no accounts, databases, cookies, browser storage, or saved project history. The API key remains only in current React state and is cleared on refresh. When analysis is requested, extracted project content and the key are sent through the server route to OpenRouter and the chosen model provider. Provider data policies apply.
 
 ## Supported file types
 
-| Type | Handling |
-| --- | --- |
-| `.txt`, `.md` | Plain text extraction |
-| `.csv` | Browser-side Papa Parse conversion to labelled rows |
-| `.docx` | Browser-side Mammoth raw-text extraction |
+| Type          | Handling                                            |
+| ------------- | --------------------------------------------------- |
+| `.txt`, `.md` | Plain-text extraction                               |
+| `.csv`        | Browser-side Papa Parse conversion to labelled rows |
+| `.docx`       | Browser-side Mammoth raw-text extraction            |
 
 Files are limited to 5 MB each, 10 files total, and 80,000 extracted characters across all feedback.
 
@@ -49,9 +67,9 @@ npm run dev
 
 Open `http://localhost:3000`.
 
-## OpenRouter API key
+## OpenRouter API key and model
 
-Use your own key in the workspace for the current analysis only. Select a model that supports OpenRouter strict JSON Schema output; RevisionFlow intentionally does not silently switch models or fall back to freeform text.
+Use your own key in the workspace for the current analysis only. The verified default is `openai/gpt-4o-2024-08-06`, which OpenRouter currently lists with `response_format` and `structured_outputs` support. You may enter another compatible model; RevisionFlow never switches models silently.
 
 ## Development commands
 
@@ -66,13 +84,13 @@ npm run start
 
 ## Deployment
 
-This is a standard Next.js application. Deploy it to Vercel, a Node-compatible container, or another Next.js host. No environment variables are required because the user supplies the OpenRouter key per analysis. Ensure the host permits outbound HTTPS requests to `openrouter.ai`.
+RevisionFlow is a standard Next.js app and is ready for Vercel or another Node-compatible host. No environment variables are required because each user supplies an OpenRouter key per analysis. The host must permit outbound HTTPS requests to `openrouter.ai`.
 
-## Limitations
+## Limitations and roadmap
 
-This is an open-source MVP, not a hosted collaboration platform. It has no user accounts, persistence, team collaboration, PDFs/OCR/audio/video parsing, provider integrations, or automated edits or emails. Model output quality depends on the chosen provider and supplied feedback.
+This is an open-source MVP, not a hosted collaboration platform. It intentionally has no accounts, persistence, team collaboration, PDFs/OCR/audio/video parsing, provider integrations, automated edits, or email sending.
 
-## Roadmap
+Planned, but not included in v0.1.1:
 
 - Gmail, Slack, and Frame.io integrations
 - Jira, Trello, and Notion export
@@ -90,7 +108,3 @@ Issues and focused pull requests are welcome. Please run linting, type checks, a
 ## Disclaimer
 
 RevisionFlow organises supplied project feedback. It does not replace project judgment, client approval, or legal review.
-
-## 简短中文说明
-
-这是一个开源 MVP：将客户反馈整理为可追溯、可编辑、可导出的修改计划。请使用自己的 OpenRouter Key，并了解所选模型提供商的数据政策。
